@@ -23,4 +23,4 @@ jobs:
     - stage: XL RELEASE
       script:
       - cd xlr
-      - sh deploy_votingapp-redis.sh $XLR_CREDENTIALS $XLR_VOTE_DEPLOY_PATH $VOTE_REPO:travis-$TRAVIS_BUILD_NUMBER
+      - sh deploy_votingapp.sh $XLR_CREDENTIALS $XLR_VOTE_DEPLOY_PATH $VOTE_REPO:travis-$TRAVIS_BUILD_NUMBER
