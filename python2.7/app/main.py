@@ -1,6 +1,10 @@
 from flask import Flask
 app = Flask(__name__)
 
+@app.route("/hello")
+def hello():
+    return "Hello World from Flask"
+
 @app.route("/")
 def hello():
     return "Hello World from Flask in a uWSGI Nginx Docker container with \
