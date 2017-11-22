@@ -1,9 +1,13 @@
 from flask import Flask
+import json
+
 app = Flask(__name__)
 
 @app.route("/epicstatus")
-def hello():
-    return "Hello World from Flask"
+def epicstatus():
+    dict = {'green': 8, 'red': 1}
+    json_str = json.dumps(dict)
+    return json_str
 
 @app.route("/")
 def hello():
