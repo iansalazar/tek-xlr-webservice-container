@@ -22,5 +22,5 @@ jobs:
       - docker push $VOTE_REPO
     - stage: XL RELEASE
       script:
-      - #cd xlr
-      - #sh deploy_votingapp-redis.sh $XLR_CREDENTIALS $XLR_VOTE_DEPLOY_PATH $VOTE_REPO:travis-$TRAVIS_BUILD_NUMBER
+      - cd xlr
+      - sh deploy_votingapp-redis.sh $XLR_CREDENTIALS $XLR_VOTE_DEPLOY_PATH $VOTE_REPO:travis-$TRAVIS_BUILD_NUMBER
