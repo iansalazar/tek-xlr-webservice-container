@@ -4,12 +4,6 @@ import json
 app = Flask(__name__)
 
 @app.route("/epicstatus")
-def epicstatus():
-    dict = {'green': 8, 'red': 1}
-    json_str = json.dumps(dict)
-    return json_str
-
-@app.route("/epicstatusdetail")
 def epicstatusdetail():
     details = [{"name":"DE1","url":"http://www.google.com"},{"owner":"J. Doe","status":"Green"},{"test-start":"10/01/17","test-cases-assigned": 4,"executed": 4, "percent-compete": 100, 
                 "passed": 4, "failed": 4, "defects-logged": 1, "open": 0, "resolved": 0, "closed": 1 },
