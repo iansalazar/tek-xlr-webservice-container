@@ -5,11 +5,26 @@ app = Flask(__name__)
 
 @app.route("/epicstatus")
 def epicstatusdetail():
-    details = [{"name":"DE1", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green" , "test-start":"10/01/17", "test-cases-assigned": 4, "executed": 4, "percent-compete": 100, 
-                "passed": 4, "failed": 4, "defects-logged": 1, "open": 0, "resolved": 0, "closed": 1},
-               {"name":"DE2", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "test-start":"10/01/17", "test-cases-assigned": 9, "executed": 9, "percent-compete": 100, 
-                "passed": 9, "failed": 0, "defects-logged": 0, "open": 0, "resolved": 0, "closed": 0}
-                ]
+    details = [
+		{"name":"DE1", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green" , "teststart":"10/01/17", "testcasesassigned": 4, "executed": 4, "percentcomplete": 100, 
+                 "passed": 4, "failed": 0, "defectslogged": 1, "open": 0, "resolved": 0, "closed": 1},
+                {"name":"DE2", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 9, "executed": 9, "percentcomplete": 100, 
+                 "passed": 9, "failed": 0, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE3", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 1, "executed": 1, "percentcomplete": 100,    
+                 "passed": 1, "failed": 0, "defectslogged": 1, "open": 0, "resolved": 0, "closed": 1},
+                {"name":"DE4", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 4, "executed": 4, "percentcomplete": 100,    
+                 "passed": 4, "failed": 0, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE5", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 2, "executed": 2, "percentcomplete": 100,    
+                 "passed": 9, "failed": 2, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE6", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 6, "executed": 6, "percentcomplete": 100,    
+                 "passed": 6, "failed": 0, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE7", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 14, "executed": 14, "percentcomplete": 100,    
+                 "passed": 14, "failed": 0, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE8", "url":"http://www.google.com", "owner":"J. Doe", "status":"Green", "teststart":"10/01/17", "testcasesassigned": 10, "executed": 10, "percentcomplete": 100,    
+                 "passed": 10, "failed": 0, "defectslogged": 0, "open": 0, "resolved": 0, "closed": 0},
+                {"name":"DE9", "url":"http://www.google.com", "owner":"J. Doe", "status":"Red", "teststart":"11/15/17", "testcasesassigned": 4, "executed": 4, "percentcomplete": 100,    
+                 "passed": 4, "failed": 1, "defectslogged": 1, "open": 1, "resolved": 0, "closed": 0}
+              ]
     json_str = json.dumps(details)
     return json_str
 
