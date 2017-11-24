@@ -71,6 +71,22 @@ def featurestatus():
     json_str = json.dumps(dict)
     return json_str
 
+@app.route("/featuresinprogress")
+def featuresinprogress():
+    details = [ 
+                {"description":"Feature 1 Description", "stories": 4},
+		{"description":"Feature 2 Description", "stories": 1},
+		{"description":"Feature 3 Description", "stories": 2},
+		{"description":"Feature 4 Description", "stories": 7},
+		{"description":"Feature 5 Description", "stories": 3},
+		{"description":"Feature 6 Description", "stories": 8},
+		{"description":"Feature 7 Description", "stories": 5},
+		{"description":"Feature 8 Description", "stories": 9}
+              ]
+
+    json_str = json.dumps(details)
+    return json_str
+
 @app.route("/securitystatus")
 def securitystatus():
     dict = {'issues': 1, 'critical': 0}
