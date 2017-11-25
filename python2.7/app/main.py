@@ -153,7 +153,7 @@ def deployments():
                 {"type":"DEV", "state": 1, "jobstart": "2017-11-25T03:00:00Z", "jobend": "2017-11-25T03:05:00Z"},
                 {"type":"DEV", "state": 1, "jobstart": "2017-11-24T23:30:00Z", "jobend": "2017-11-24T23:35:00Z"},
                 {"type":"QA", "state": 1, "jobstart": "2017-11-23T09:30:00Z", "jobend": "2017-11-23T09:35:00Z"},
-                {"type":"QA', "state": 1, "jobstart": "2017-11-22T08:30:00Z", "jobend": "2017-11-22T08:35:00Z"},
+                {"type":"QA", "state": 1, "jobstart": "2017-11-22T08:30:00Z", "jobend": "2017-11-22T08:35:00Z"},
                 {"type":"QA", "state": 0, "jobstart": "2017-11-22T07:30:00Z", "jobend": "2017-11-22T07:35:00Z"}
               ]
 
