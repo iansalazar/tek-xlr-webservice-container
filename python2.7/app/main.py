@@ -131,7 +131,7 @@ def syntheticteststatus():
 @app.route("/builds")
 def builds():
     details = [
-                {"number":2200, "state": 1, "branch": "master", "jobstart": "2017-11-25T03:00:00Z", "jobend": "2017-11-25T03:05:00Z", "commitmessage": "Changed a lot of things.." },
+                {"number":2200, "state": 1, "branch": "master", "jobstart": "2017-11-27T01:00:00Z", "jobend": "2017-11-27T01:35:00Z", "commitmessage": "Changed a lot of things.." },
 		{"number":2199, "state": 1, "branch": "master", "jobstart": "2017-11-24T23:30:00Z", "jobend": "2017-11-24T23:35:00Z", "commitmessage": "Changed a lot of things.." },
 		{"number":2198, "state": 1, "branch": "master", "jobstart": "2017-11-23T09:30:00Z", "jobend": "2017-11-23T09:35:00Z", "commitmessage": "Changed a lot of things.." },
 		{"number":2197, "state": 1, "branch": "master", "jobstart": "2017-11-22T08:30:00Z", "jobend": "2017-11-22T08:35:00Z", "commitmessage": "Changed a lot of things.." },
@@ -140,8 +140,8 @@ def builds():
 		{"number":2194, "state": 1, "branch": "master", "jobstart": "2017-11-22T05:30:00Z", "jobend": "2017-11-22T05:35:00Z", "commitmessage": "Changed a lot of things.." },
 		{"number":2193, "state": 1, "branch": "master", "jobstart": "2017-11-22T04:30:00Z", "jobend": "2017-11-22T04:35:00Z", "commitmessage": "Changed a lot of things.." },
 		{"number":2192, "state": 1, "branch": "master", "jobstart": "2017-11-22T03:30:00Z", "jobend": "2017-11-22T03:35:00Z", "commitmessage": "Changed a lot of things.." },
-		{"number":2191, "state": 1, "branch": "master", "jobstart": "2017-11-22T02:30:00Z", "jobend": "2017-11-22T02:35:00Z", "commitmessage": "Changed a lot of things.." },
-		{"number":2190, "state": 0, "branch": "master", "jobstart": "2017-11-22T01:30:00Z", "jobend": "2017-11-22T01:35:00Z", "commitmessage": "Changed a lot of things.." }
+		{"number":2191, "state": 1, "branch": "master", "jobstart": "2017-11-20T02:30:00Z", "jobend": "2017-11-20T02:35:00Z", "commitmessage": "Changed a lot of things.." },
+		{"number":2190, "state": 0, "branch": "master", "jobstart": "2017-11-13T01:30:00Z", "jobend": "2017-11-13T01:35:00Z", "commitmessage": "Changed a lot of things.." }
               ]
 
     json_str = json.dumps(details)
@@ -150,11 +150,11 @@ def builds():
 @app.route("/deployments")
 def deployments():
     details = [
-                {"type":"DEV", "state": 1, "jobstart": "2017-11-25T03:00:00Z", "jobend": "2017-11-25T03:05:00Z"},
+                {"type":"DEV", "state": 1, "jobstart": "2017-11-27T01:00:00Z", "jobend": "2017-11-27T01:35:00Z"},
                 {"type":"DEV", "state": 1, "jobstart": "2017-11-24T23:30:00Z", "jobend": "2017-11-24T23:35:00Z"},
                 {"type":"QA", "state": 1, "jobstart": "2017-11-23T09:30:00Z", "jobend": "2017-11-23T09:35:00Z"},
-                {"type":"QA", "state": 1, "jobstart": "2017-11-22T08:30:00Z", "jobend": "2017-11-22T08:35:00Z"},
-                {"type":"QA", "state": 0, "jobstart": "2017-11-22T07:30:00Z", "jobend": "2017-11-22T07:35:00Z"}
+                {"type":"QA", "state": 1, "jobstart": "2017-11-20T08:30:00Z", "jobend": "2017-11-20T08:35:00Z"},
+                {"type":"QA", "state": 0, "jobstart": "2017-11-13T07:30:00Z", "jobend": "2017-11-13T07:35:00Z"}
               ]
 
     json_str = json.dumps(details)
