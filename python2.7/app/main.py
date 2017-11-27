@@ -160,6 +160,25 @@ def deployments():
     json_str = json.dumps(details)
     return json_str
 
+@app.route("/commits")
+def commits():
+    details = [
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-27T01:00:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-27T08:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-23T09:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-22T08:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-22T07:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-22T06:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-22T05:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-20T04:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-20T03:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-13T02:30:00Z", "message": "Changed a lot of things.." },
+                {"user":"J. Doe", "branch": "master", "date": "2017-11-13T01:30:00Z", "message": "Changed a lot of things.." }
+              ]
+
+    json_str = json.dumps(details)
+    return json_str
+
 @app.route("/")
 def hello():
     return "Hello from the TEK XLR Web service...."
