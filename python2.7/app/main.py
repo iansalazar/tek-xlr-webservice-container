@@ -112,19 +112,19 @@ def testcasestatus():
 
 @app.route("/unitteststatus")
 def unitteststatus():
-    dict = {'passed': 53, 'failed': 1}
+    dict = {'tests': 134, 'failed': 5}
     json_str = json.dumps(dict)
     return json_str
 
 @app.route("/codeanalysisstatus")
 def codeanalysisstatus():
-    dict = {'passed': 53, 'failed': 1}
+    dict = {'issues': 11, 'critical': 2}
     json_str = json.dumps(dict)
     return json_str
 
 @app.route("/syntheticteststatus")
 def syntheticteststatus():
-    dict = {'passed': 53, 'failed': 1}
+    dict = {'tests': 11, 'failed': 0}
     json_str = json.dumps(dict)
     return json_str
 
