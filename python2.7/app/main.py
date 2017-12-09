@@ -23,15 +23,14 @@ class requirement_health_thread(Thread):
         headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
         address = 'https://sandbox.rallydev.com'
         params = '/slm/webservice/v2.0/portfolioitem/epic?fetch=' + fetch + '&start=1&pagesize=' + str(pagesize) + '&' + query
-        
+        print "getting health_epics"
         epicresults = DataOps.getdata( address + params, headers )
 
         for key in epicresults['QueryResult']['Results']:
             RequirementPipelineHealth.getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
 
-	print "health_epipcs"
+	print "got health_epipcs"
 	health_epics = epics
-	print health_epics
 
 @app.route("/cacherequirementhealth")
 def cacherequirementpipelinehealth():
