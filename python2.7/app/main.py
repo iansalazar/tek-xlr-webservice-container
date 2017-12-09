@@ -1,7 +1,50 @@
 from flask import Flask
+from threading import Thread
 import json
+import DataOps
+import RequirementPipelineHealth 
+
+global health_epics
+health_epics = []
 
 app = Flask(__name__)
+
+class requirement_health_thread(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+        #self.range = range
+
+    def run(self):
+        global health_epics
+	epics = []
+    
+        pagesize = 100
+        fetch = 'true' 
+        query = 'query=(Project.Name%20=%20"DX%20SANDBOX")'
+        headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
+        address = 'https://sandbox.rallydev.com'
+        params = '/slm/webservice/v2.0/portfolioitem/epic?fetch=' + fetch + '&start=1&pagesize=' + str(pagesize) + '&' + query
+        
+        epicresults = DataOps.getdata( address + params, headers )
+	print "epicresults"
+	print epicresults
+
+        for key in epicresults['QueryResult']['Results']:
+            RequirementPipelineHealth.getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
+
+	health_epics = epics
+	print "health_epics"
+	print health_epics
+
+@app.route("/cacherequirementhealth")
+def cacherequirementpipelinehealth():
+    t1 = requirement_health_thread()
+    t1.start()
+    return "cacherequirementhealth fetch started."
+
+@app.route("/requirementhealth")
+def requirementhealth():
+    return json.dumps(health_epics)
 
 @app.route("/epicstatus")
 def epicstatus():
