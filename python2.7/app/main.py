@@ -29,11 +29,14 @@ class requirement_health_thread(Thread):
         for key in epicresults['QueryResult']['Results']:
             RequirementPipelineHealth.getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
 
+	print "health_epipcs"
 	health_epics = epics
+	print health_epics
 
 @app.route("/cacherequirementhealth")
 def cacherequirementpipelinehealth():
     t1 = requirement_health_thread()
+    print "starting work thread"
     t1.start()
     return "cacherequirementhealth fetch started."
 
