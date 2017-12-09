@@ -1,5 +1,33 @@
 import json
+from threading import Thread
 import DataOps
+
+global health_epics
+health_epics = []
+
+class requirement_health_thread(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+
+    def run(self):
+        global health_epics
+        epics = []
+
+        pagesize = 100
+        fetch = 'true'
+        query = 'query=(Project.Name%20=%20"DX%20SANDBOX")'
+        headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
+        address = 'https://sandbox.rallydev.com'
+        params = '/slm/webservice/v2.0/portfolioitem/epic?fetch=' + fetch + '&start=1&pagesize=' + str(pagesize) + '&' + query
+        print "getting health_epics"
+        epicresults = DataOps.getdata( address + params, headers )
+
+        for key in epicresults['QueryResult']['Results']:
+            getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
+
+        print "got health_epipcs"
+        health_epics = epics
+        print health_epics
 
 def getfeatures( epic_id, epic_name, epics, url ):
     headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
