@@ -1,11 +1,12 @@
 from flask import Flask
 import json
-import RequirementPipelineHealth 
+import RequirementPipelineHealth
+import ImplementationPipelineHealth
 
 app = Flask(__name__)
 
 @app.route("/cacherequirementhealth")
-def cacherequirementpipelinehealth():
+def cacherequirementhealth():
     t1 = RequirementPipelineHealth.requirement_health_thread()
     print "starting work thread"
     t1.start()
@@ -13,7 +14,18 @@ def cacherequirementpipelinehealth():
 
 @app.route("/requirementhealth")
 def requirementhealth():
-    return json.dumps(RequirementPipelineHealth.health_epics)
+    return json.dumps(RequirementPipelineHealth.requirement_epics)
+
+@app.route("/cacheimplementationhealth")
+def cacheimplementationhealth():
+    t1 = ImplementationPipelineHealth.implementation_health_thread()
+    print "starting work thread"
+    t1.start()
+    return "cacheimplementationhealth fetch started."
+
+@app.route("/implementationhealth")
+def implementationhealth():
+    return json.dumps(ImplementationPipelineHealth.implementation_epics)
 
 @app.route("/epicstatus")
 def epicstatus():

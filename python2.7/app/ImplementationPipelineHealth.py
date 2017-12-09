@@ -2,15 +2,15 @@ import json
 from threading import Thread
 import DataOps
 
-global requirement_epics
-requirement_epics = []
+global implementation_epics
+implementation_epics = []
 
-class requirement_health_thread(Thread):
+class implementation_health_thread(Thread):
     def __init__(self):
         Thread.__init__(self)
 
     def run(self):
-        global requirement_epics
+        global implementation_epics
         epics = []
 
         pagesize = 100
@@ -19,14 +19,14 @@ class requirement_health_thread(Thread):
         headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
         address = 'https://sandbox.rallydev.com'
         params = '/slm/webservice/v2.0/portfolioitem/epic?fetch=' + fetch + '&start=1&pagesize=' + str(pagesize) + '&' + query
-        print "getting requirement_epics"
+        print "getting implementation_epics"
         epicresults = DataOps.getdata( address + params, headers )
 
         for key in epicresults['QueryResult']['Results']:
             getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
 
-        print "got requirement_epipcs"
-        requirement_epics = epics
+        print "got implementation_epipcs"
+        implementation_epics = epics
 
 def getfeatures( epic_id, epic_name, epics, url ):
     headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
@@ -34,11 +34,11 @@ def getfeatures( epic_id, epic_name, epics, url ):
 
     for key in queryresults['QueryResult']['Results']:
         Total = 0
-        Undefined = 0
         Defined = 0
+        InProgress = 0
+        Demoed = 0
         dict = {'Epic': '', 'EpicName': '', 'Feature': '', 'FeatureName': '', 'Owner': '', 'Status': 'Green', 'TotalUserStories': 0,
-                'UndefinedUserStories': 0,
-                'DefinedUserStories': 0}
+                'DefinedUserStories': 0, 'UserStoriesInProgress': 0, 'DemoedUserStories': 0}
 
         dict['Epic'] = epic_id
         dict['EpicName'] = epic_name
@@ -50,17 +50,20 @@ def getfeatures( epic_id, epic_name, epics, url ):
         else:
             dict['Owner'] = 'Unassigned'
 
-        Total, Undefined, Defined = getuserstoryinfo(key['UserStories']['_ref'])
+        Total, Defined, InProgress, Demoed = getuserstoryinfo(key['UserStories']['_ref'])
 
         dict['TotalUserStories'] = Total
-        dict['UndefinedUserStories'] = Undefined
         dict['DefinedUserStories'] = Defined
-        epics.append(dict)
+        dict['UserStoriesInProgress'] = InProgress
+        dict['DemoedUserStories'] = Demoed
+
+	epics.append(dict)
 
 def getuserstoryinfo(url):
     count = 0
-    undefined = 0
     defined = 0
+    inprogress = 0
+    demoed = 0
     headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
 
     queryresults = DataOps.getdata( url, headers )
@@ -71,7 +74,10 @@ def getuserstoryinfo(url):
         if key['FlowState']['_refObjectName'] == 'Defined':
             defined = defined + 1
 
-        if key['FlowState']['_refObjectName'] == 'Undefined':
-            undefined = undefined + 1
+        if key['FlowState']['_refObjectName'] == 'In-Progress':
+            inprogress = inprogress + 1
 
-    return count, undefined, defined
+        if key['FlowState']['_refObjectName'] == 'Accepted':
+            demoed = demoed + 1
+
+    return count, defined, inprogress, demoed
