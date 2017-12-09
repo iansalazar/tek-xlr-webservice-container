@@ -12,7 +12,6 @@ app = Flask(__name__)
 class requirement_health_thread(Thread):
     def __init__(self):
         Thread.__init__(self)
-        #self.range = range
 
     def run(self):
         global health_epics
@@ -26,15 +25,11 @@ class requirement_health_thread(Thread):
         params = '/slm/webservice/v2.0/portfolioitem/epic?fetch=' + fetch + '&start=1&pagesize=' + str(pagesize) + '&' + query
         
         epicresults = DataOps.getdata( address + params, headers )
-	print "epicresults"
-	print epicresults
 
         for key in epicresults['QueryResult']['Results']:
             RequirementPipelineHealth.getfeatures(str(key['FormattedID']), str(key['Name']), epics, str(key['Children']['_ref']))
 
 	health_epics = epics
-	print "health_epics"
-	print health_epics
 
 @app.route("/cacherequirementhealth")
 def cacherequirementpipelinehealth():
