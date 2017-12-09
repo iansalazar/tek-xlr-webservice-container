@@ -27,7 +27,6 @@ class requirement_health_thread(Thread):
 
         print "got health_epipcs"
         health_epics = epics
-        print health_epics
 
 def getfeatures( epic_id, epic_name, epics, url ):
     headers = {'content-type': 'application/json', 'Authorization': 'Basic aWFzYWxhemFyQHRla3N5c3RlbXMuY29tOnBhbmNobzEyMw=='}
