@@ -1,31 +1,30 @@
 from flask import Flask
+from flask import request
 import json
-import RequirementPipelineHealth
-import ImplementationPipelineHealth
+
+global selenium_results
+selenium_results = []
 
 app = Flask(__name__)
 
-@app.route("/cacherequirementhealth")
-def cacherequirementhealth():
-    t1 = RequirementPipelineHealth.requirement_health_thread()
-    print "starting work thread"
-    t1.start()
-    return "cacherequirementhealth fetch started."
+@app.route('/testdata/selenium') # http://0.0.0.0/testdata/selenium?testdata=[{"name":"Blah"}]
+def selenium():
+   global selenium_results
+   # i'm not sure if the returning object is a list or dictionary. I'll append everything to a list for now
+   #selenium_results  = json.loads(request.args.get('testdata', None))
+   selenium_results = []
+   selenium_results.append(json.loads(request.args.get('testdata', None)))
+   return "Data received."
 
-@app.route("/requirementhealth")
-def requirementhealth():
-    return json.dumps(RequirementPipelineHealth.requirement_epics)
+@app.route('/api/foo') # http://0.0.0.0/api/foo?name=John&surname=Doe
+def foo():
+   name  = request.args.get('name', None)
+   surname  = request.args.get('surname', None)
+   return "Hello " + name + " " + surname
 
-@app.route("/cacheimplementationhealth")
-def cacheimplementationhealth():
-    t1 = ImplementationPipelineHealth.implementation_health_thread()
-    print "starting work thread"
-    t1.start()
-    return "cacheimplementationhealth fetch started."
-
-@app.route("/implementationhealth")
-def implementationhealth():
-    return json.dumps(ImplementationPipelineHealth.implementation_epics)
+@app.route("/testresults/selenium") # http://0.0.0.0/testresults/selenium
+def seleniumresults():
+   return json.dumps(selenium_results)
 
 @app.route("/epicstatus")
 def epicstatus():
@@ -83,7 +82,7 @@ def storystatus():
     json_str = json.dumps(details)
     return json_str
 
-@app.route("/defectstatus")
+@app.route("/defecthealth")
 def defectstatus():
     details = [
                 {"defect":"Defect1", "url":"http://www.google.com", "owner":"J. Doe", "description":"Description..." , "status":"Green" , "workstart":"10/01/17", "state": 1, "percentcomplete": 100},
