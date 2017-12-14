@@ -3,18 +3,28 @@ from flask import request
 import json
 
 global selenium_results
-selenium_results = []
+selenium_results = None
 
 app = Flask(__name__)
 
-@app.route('/testdata/selenium') # http://0.0.0.0/testdata/selenium?testdata=[{"name":"Blah"}]
-def selenium():
-   global selenium_results
+@app.route('/testdata/selenium', methods = ['POST'])
+def seleniumPostJsonHandler():
+    global selenium_results
+
+    if request.is_json:
+        selenium_results = request.get_json()
+        return 'JSON posted'
+    else:
+        return 'Invalid JSON posted'
+
+#@app.route('/testdata/selenium') # http://0.0.0.0/testdata/selenium?testdata=[{"name":"Blah"}]
+#def selenium():
+#   global selenium_results
    # i'm not sure if the returning object is a list or dictionary. I'll append everything to a list for now
    #selenium_results  = json.loads(request.args.get('testdata', None))
-   selenium_results = []
-   selenium_results.append(json.loads(request.args.get('testdata', None)))
-   return "Data received."
+   #selenium_results = []
+   #selenium_results.append(json.loads(request.args.get('testdata', None)))
+#   return "Data received."
 
 @app.route('/api/foo') # http://0.0.0.0/api/foo?name=John&surname=Doe
 def foo():
