@@ -214,7 +214,7 @@ def commits():
 
 @app.route("/")
 def hello():
-    return "Hello from the TEK XLR Web service...."
+    return "Hello from the TEK XLR Web service...DEMO TIME!!!! No Pressure.
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
